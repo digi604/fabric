@@ -23,7 +23,7 @@ def exists(path, use_sudo=False, verbose=False):
     behavior.
     """
     func = use_sudo and sudo or run
-    cmd = 'test -e "%s"' % path
+    cmd = 'test -e %s' % path
     # If verbose, run normally
     if verbose:
         with settings(warn_only=True):
@@ -243,7 +243,7 @@ def contains(filename, text, exact=False, use_sudo=False):
     if exact:
         text = "^%s$" % text
     with settings(hide('everything'), warn_only=True):
-        return func('egrep "%s" "%s"' % (
+        return func('fgrep "%s" %s' % (
             text.replace('"', r'\"'),
             filename.replace('"', r'\"')
         ))
